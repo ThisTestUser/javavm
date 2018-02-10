@@ -394,14 +394,14 @@ public class java_lang_Class {
             }
             return JavaWrapper.wrap(array);
         }));
-        vm.hook(HookGenerator.generateUnknownHandlingHook(vm, THIS, "getDeclaredClasses0", "()[Ljava/lang/reflect/Method;", false, Cause.ALL, Effect.NONE, (ctx, inst, args) -> {
+        vm.hook(HookGenerator.generateUnknownHandlingHook(vm, THIS, "getDeclaredClasses0", "()[Ljava/lang/Class;", false, Cause.ALL, Effect.NONE, (ctx, inst, args) -> {
             JavaClass clazz = asKlass(inst);
             JavaClass[] declaredClasses = clazz.getDeclaredClasses();
             JavaWrapper[] array = new JavaWrapper[declaredClasses.length];
             for (int i = 0; i < declaredClasses.length; i++) {
                 array[i] = declaredClasses[i].getOop();
             }
-            return JavaWrapper.createArray(JavaClass.forName(vm, "[Ljava/lang/reflect/Method;"), array);
+            return JavaWrapper.createArray(JavaClass.forName(vm, "[Ljava/lang/Class;"), array);
         }));
         vm.hook(HookGenerator.generateUnknownHandlingHook(vm, THIS, "desiredAssertionStatus0", "(Ljava/lang/Class;)Z", true, Cause.ALL, Effect.NONE, (ctx, inst, args) -> {
             // todo allow assertions?
